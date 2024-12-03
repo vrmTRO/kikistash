@@ -1,0 +1,48 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ isEditing ? 'Edit Shoe' : 'Add Shoe' }}">
+        <ActionItem text="Save" tap="{{ onSave }}" ios.position="right" />
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Basic Info -->
+            <TextField hint="Shoe Name" text="{{ shoe.name }}" class="input mb-4" />
+            
+            <GridLayout columns="*, auto" class="mb-4">
+                <TextField col="0" hint="Image URL" text="{{ shoe.imageUrl }}" class="input" />
+                <Button col="1" text="Upload" tap="{{ onUploadImage }}" class="btn btn-primary ml-2" />
+            </GridLayout>
+
+            <!-- Pricing -->
+            <GridLayout columns="*, *" class="mb-4">
+                <TextField col="0" hint="Purchase Cost" text="{{ shoe.purchaseCost }}" 
+                          keyboardType="number" class="input mr-2" />
+                <TextField col="1" hint="Selling Price" text="{{ shoe.sellingPrice }}" 
+                          keyboardType="number" class="input" />
+            </GridLayout>
+
+            <TextField hint="Low Stock Threshold" text="{{ shoe.lowStockThreshold }}" 
+                      keyboardType="number" class="input mb-4" />
+
+            <!-- Sizes -->
+            <Label text="Sizes" class="text-lg font-bold mb-2" />
+            <ListView items="{{ shoe.sizes }}" class="mb-4">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, *, auto" class="p-2">
+                        <TextField col="0" hint="Size" text="{{ size }}" class="input mr-2" />
+                        <TextField col="1" hint="Quantity" text="{{ quantity }}" 
+                                 keyboardType="number" class="input" />
+                        <Button col="2" text="✕" tap="{{ $parent.onRemoveSize }}" 
+                                class="btn btn-danger ml-2" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+
+            <Button text="Add Size" tap="{{ onAddSize }}" class="btn btn-outline mb-4" />
+
+            <!-- Error Message -->
+            <Label text="{{ errorMessage }}" class="text-red-500 text-center" 
+                   visibility="{{ errorMessage ? 'visible' : 'collapsed' }}" textWrap="true" />
+        </StackLayout>
+    </ScrollView>
+</Page>

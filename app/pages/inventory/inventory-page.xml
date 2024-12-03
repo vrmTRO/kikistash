@@ -1,0 +1,28 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Inventory">
+        <ActionItem text="Add" tap="{{ onAddShoe }}" ios.position="right" />
+    </ActionBar>
+
+    <GridLayout rows="auto, *">
+        <!-- Search Bar -->
+        <SearchBar row="0" hint="Search shoes..." text="{{ searchQuery }}" 
+                  submit="{{ onSearch }}" clear="{{ onClearSearch }}" />
+
+        <!-- Shoes List -->
+        <ListView row="1" items="{{ shoes }}" itemTap="{{ onShoeSelect }}">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *, auto" class="p-2 border-b border-gray-200">
+                    <Image col="0" src="{{ imageUrl || '~/assets/default-shoe.png' }}" 
+                           class="w-16 h-16 rounded" />
+                    <StackLayout col="1" class="ml-2">
+                        <Label text="{{ name }}" class="font-bold" />
+                        <Label text="{{ 'Stock: ' + totalQuantity }}" class="text-gray-600" />
+                        <Label text="{{ 'Price: $' + sellingPrice }}" class="text-green-600" />
+                    </StackLayout>
+                    <Button col="2" text="Edit" tap="{{ $parent.onEditShoe }}" 
+                            class="btn btn-sm btn-primary" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

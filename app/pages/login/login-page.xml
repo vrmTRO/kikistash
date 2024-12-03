@@ -1,0 +1,19 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="bg-gray-100">
+    <StackLayout class="p-4">
+        <Image src="~/assets/logo.png" class="h-32 w-32 mb-8 self-center" />
+        
+        <Label text="Welcome to KikiStash" class="text-3xl font-bold text-center mb-8" />
+        
+        <TextField hint="Email" text="{{ email }}" keyboardType="email" class="input mb-4 p-4 bg-white rounded" />
+        
+        <TextField hint="Password" text="{{ password }}" secure="true" class="input mb-6 p-4 bg-white rounded" />
+        
+        <Label text="{{ errorMessage }}" class="text-red-500 text-center mb-2" visibility="{{ errorMessage ? 'visible' : 'collapsed' }}" textWrap="true" />
+        
+        <Button text="{{ isLoading ? 'Logging in...' : 'Login' }}" tap="{{ onLogin }}" 
+                class="btn btn-primary mb-4" isEnabled="{{ !isLoading }}" />
+        
+        <Button text="Skip Login" tap="{{ onSkipLogin }}" class="btn btn-secondary" 
+                isEnabled="{{ !isLoading }}" />
+    </StackLayout>
+</Page>

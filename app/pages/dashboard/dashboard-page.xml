@@ -1,0 +1,64 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Dashboard">
+        <ActionItem text="Logout" tap="{{ onLogout }}" ios.position="right" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Summary Cards -->
+            <GridLayout columns="*, *" rows="auto, auto" class="mb-4">
+                <StackLayout col="0" row="0" class="bg-blue-500 p-4 m-1 rounded-lg">
+                    <Label text="Total Inventory Value" class="text-white" />
+                    <Label text="{{ totalInventoryValue | currency }}" class="text-white text-lg font-bold" />
+                </StackLayout>
+                
+                <StackLayout col="1" row="0" class="bg-green-500 p-4 m-1 rounded-lg">
+                    <Label text="Total Sales Revenue" class="text-white" />
+                    <Label text="{{ totalSalesRevenue | currency }}" class="text-white text-lg font-bold" />
+                </StackLayout>
+                
+                <StackLayout col="0" row="1" class="bg-purple-500 p-4 m-1 rounded-lg">
+                    <Label text="Total Profit" class="text-white" />
+                    <Label text="{{ totalProfit | currency }}" class="text-white text-lg font-bold" />
+                </StackLayout>
+                
+                <StackLayout col="1" row="1" class="bg-orange-500 p-4 m-1 rounded-lg">
+                    <Label text="Outstanding Balances" class="text-white" />
+                    <Label text="{{ outstandingBalances | currency }}" class="text-white text-lg font-bold" />
+                </StackLayout>
+            </GridLayout>
+
+            <!-- Alerts Section -->
+            <StackLayout class="mb-4" visibility="{{ hasAlerts ? 'visible' : 'collapse' }}">
+                <Label text="Alerts" class="text-xl font-bold mb-2" />
+                <ListView items="{{ alerts }}" class="list-group">
+                    <ListView.itemTemplate>
+                        <StackLayout class="list-group-item">
+                            <Label text="{{ message }}" textWrap="true" class="text-red-500" />
+                        </StackLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <!-- Quick Actions -->
+            <GridLayout columns="*, *" rows="auto" class="mb-4">
+                <Button text="Add Shoe" tap="{{ navigateToAddShoe }}" class="btn btn-primary m-1" col="0" />
+                <Button text="New Sale" tap="{{ navigateToNewSale }}" class="btn btn-primary m-1" col="1" />
+            </GridLayout>
+
+            <!-- Recent Sales -->
+            <Label text="Recent Sales" class="text-xl font-bold mb-2" />
+            <ListView items="{{ recentSales }}" class="list-group">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, auto" class="list-group-item p-2">
+                        <StackLayout col="0">
+                            <Label text="{{ shoeName }}" class="font-bold" />
+                            <Label text="{{ buyerName }}" class="text-gray-600" />
+                        </StackLayout>
+                        <Label text="{{ amount | currency }}" col="1" class="text-right" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</Page>

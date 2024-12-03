@@ -1,0 +1,37 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ shoe.name }}">
+        <ActionItem text="Edit" tap="{{ onEdit }}" ios.position="right" />
+        <ActionItem text="Delete" tap="{{ onDelete }}" ios.position="right" />
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Image src="{{ shoe.imageUrl || '~/assets/default-shoe.png' }}" 
+                   class="h-48 w-48 rounded-lg mb-4 self-center" />
+
+            <GridLayout columns="auto, *" rows="auto, auto, auto" class="mb-4">
+                <Label col="0" row="0" text="Purchase Cost:" class="font-bold" />
+                <Label col="1" row="0" text="{{ shoe.purchaseCost | currency }}" class="ml-2" />
+
+                <Label col="0" row="1" text="Selling Price:" class="font-bold" />
+                <Label col="1" row="1" text="{{ shoe.sellingPrice | currency }}" class="ml-2" />
+
+                <Label col="0" row="2" text="Low Stock Alert:" class="font-bold" />
+                <Label col="1" row="2" text="{{ shoe.lowStockThreshold }}" class="ml-2" />
+            </GridLayout>
+
+            <Label text="Sizes & Stock" class="text-lg font-bold mb-2" />
+            <ListView items="{{ shoe.sizes }}" class="mb-4">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, *" class="p-2 border-b border-gray-200">
+                        <Label col="0" text="{{ 'Size ' + size }}" />
+                        <Label col="1" text="{{ quantity + ' in stock' }}" 
+                               class="{{ quantity <= $parent.shoe.lowStockThreshold ? 'text-red-500' : '' }}" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+
+            <Button text="Add to Sale" tap="{{ onAddToSale }}" class="btn btn-primary" />
+        </StackLayout>
+    </ScrollView>
+</Page>

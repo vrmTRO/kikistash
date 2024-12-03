@@ -1,0 +1,5 @@
+<Frame defaultPage="pages/login/login-page">
+  <Frame.actionBar>
+    <ActionBar title="KikiStash" />
+  </Frame.actionBar>
+</Frame>
